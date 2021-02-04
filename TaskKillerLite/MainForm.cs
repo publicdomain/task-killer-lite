@@ -16,6 +16,9 @@ namespace TaskKillerLite
     /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:TaskKillerLite.MainForm"/> class.
+        /// </summary>
         public MainForm()
         {
             // The InitializeComponent() call is required for Windows Forms designer support.
@@ -39,7 +42,8 @@ namespace TaskKillerLite
         /// <param name="e">E.</param>
         private void OnExitToolStripMenuItem1Click(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Close program
+            this.Close();
         }
 
         /// <summary>
