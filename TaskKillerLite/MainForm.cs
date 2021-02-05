@@ -8,6 +8,7 @@ namespace TaskKillerLite
     // Directives
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Drawing;
     using System.Windows.Forms;
 
@@ -63,7 +64,8 @@ namespace TaskKillerLite
         /// <param name="e">E.</param>
         private void OnDailyReleasesPublicDomainDailycomToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Open current website
+            Process.Start("https://publicdomaindaily.com");
         }
 
         /// <summary>
