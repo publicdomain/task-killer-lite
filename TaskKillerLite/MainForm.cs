@@ -17,6 +17,9 @@ namespace TaskKillerLite
     /// </summary>
     public partial class MainForm : Form
     {
+        // The process exclusion list
+        List<string> processExclusionList = new List<string>() { "conhost", "dwm", "explorer", "rundll32", "taskhost" };
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:TaskKillerLite.MainForm"/> class.
         /// </summary>
@@ -24,6 +27,9 @@ namespace TaskKillerLite
         {
             // The InitializeComponent() call is required for Windows Forms designer support.
             this.InitializeComponent();
+
+            // Set initial proces list
+            this.SetProcessList();
         }
 
         /// <summary>
@@ -106,6 +112,35 @@ namespace TaskKillerLite
         }
 
         /// <summary>
+        /// Sets the process list.
+        /// </summary>
+        private void SetProcessList()
+        {
+            // List processes for current user
+            foreach (var process in Process.GetProcesses())
+            {
+                // Test against excluson list
+                if (!this.processExclusionList.Contains(process.ProcessName))
+                {
+                    // Add to process list
+                    this.processListView.Items.Add(new ListViewItem(new string[] { process.Id.ToString(), process.ProcessName, process.MainWindowTitle.ToString() }));
+                }
+            }
+
+            // Update process count
+            this.countToolStripStatusLabel.Text = this.processListView.Items.Count.ToString();
+        }
+
+        /// <summary>
+        /// Closes the process.
+        /// </summary>
+        /// <param name="processId">Process identifier.</param>
+        private void CloseProcess(int processId)
+        {
+            // TODO Add code
+        }
+
+        /// <summary>
         /// Handles the process list view click event.
         /// </summary>
         /// <param name="sender">Sender.</param>
@@ -122,7 +157,7 @@ namespace TaskKillerLite
         /// <param name="e">E.</param>
         private void OnProcessListViewDoubleClick(object sender, EventArgs e)
         {
-            // TODO Add code
+
         }
     }
 }

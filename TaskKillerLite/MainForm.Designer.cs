@@ -100,7 +100,7 @@ namespace TaskKillerLite
         	this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
         	this.newToolStripMenuItem.Name = "newToolStripMenuItem";
         	this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-        	this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+        	this.newToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
         	this.newToolStripMenuItem.Text = "&New";
         	this.newToolStripMenuItem.Click += new System.EventHandler(this.OnNewToolStripMenuItemClick);
         	// 
@@ -257,6 +257,7 @@ namespace TaskKillerLite
         	        	        	this.titleColumnHeader});
         	this.tableLayoutPanel1.SetColumnSpan(this.processListView, 2);
         	this.processListView.Dock = System.Windows.Forms.DockStyle.Fill;
+        	this.processListView.FullRowSelect = true;
         	this.processListView.Location = new System.Drawing.Point(3, 32);
         	this.processListView.Name = "processListView";
         	this.processListView.Size = new System.Drawing.Size(275, 222);
