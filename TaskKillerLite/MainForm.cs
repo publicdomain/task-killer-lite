@@ -99,7 +99,8 @@ namespace TaskKillerLite
         /// <param name="e">E.</param>
         private void OnSourceCodeGithubcomToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Open source code repository
+            Process.Start("https://github.com/publicdomain/task-killer-lite");
         }
 
         /// <summary>
