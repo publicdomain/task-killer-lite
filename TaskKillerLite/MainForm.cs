@@ -75,10 +75,10 @@ namespace TaskKillerLite
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">E.</param>
-        private void OnDailyReleasesPublicDomainDailycomToolStripMenuItemClick(object sender, EventArgs e)
+        private void OnWeeklyReleasesPublicDomainWeeklycomToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // Open current website
-            Process.Start("https://publicdomaindaily.com");
+            // Open weekly releases website
+            Process.Start("https://publicdomainweekly.com");
         }
 
         /// <summary>
@@ -134,11 +134,10 @@ namespace TaskKillerLite
         /// <summary>
         /// Closes the process.
         /// </summary>
-        /// <param name="processId">Process identifier.</param>
-        private void CloseProcess(int processId)
+        private void CloseProcess()
         {
             // Get process from passed ID
-            Process process = Process.GetProcessById(processId);
+            Process process = Process.GetProcessById(Convert.ToInt32(this.processListView.SelectedItems[0].SubItems[0].Text));
 
             // Check closing manner
             if (this.closeGracefullyCheckBox.Checked)
@@ -151,6 +150,12 @@ namespace TaskKillerLite
                 // Kill
                 process.Kill();
             }
+
+            // Remove item
+            this.processListView.Items.Remove(this.processListView.SelectedItems[0]);
+
+            // Update process count
+            this.countToolStripStatusLabel.Text = this.processListView.Items.Count.ToString();
         }
 
         /// <summary>
@@ -160,7 +165,12 @@ namespace TaskKillerLite
         /// <param name="e">E.</param>
         private void OnProcessListViewClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Check if must proceed
+            if (!this.doubleClickCheckBox.Checked)
+            {
+                // Close process
+                this.CloseProcess();
+            }
         }
 
         /// <summary>
@@ -170,7 +180,12 @@ namespace TaskKillerLite
         /// <param name="e">E.</param>
         private void OnProcessListViewDoubleClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Check if must proceed
+            if (this.doubleClickCheckBox.Checked)
+            {
+                // Close process
+                this.CloseProcess();
+            }
         }
     }
 }
