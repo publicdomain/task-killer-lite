@@ -137,7 +137,20 @@ namespace TaskKillerLite
         /// <param name="processId">Process identifier.</param>
         private void CloseProcess(int processId)
         {
-            // TODO Add code
+            // Get process from passed ID
+            Process process = Process.GetProcessById(processId);
+
+            // Check closing manner
+            if (this.closeGracefullyCheckBox.Checked)
+            {
+                // Close gracefully
+                process.CloseMainWindow();
+            }
+            else
+            {
+                // Kill
+                process.Kill();
+            }
         }
 
         /// <summary>
@@ -157,7 +170,7 @@ namespace TaskKillerLite
         /// <param name="e">E.</param>
         private void OnProcessListViewDoubleClick(object sender, EventArgs e)
         {
-
+            // TODO Add code
         }
     }
 }
