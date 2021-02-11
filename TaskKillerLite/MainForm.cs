@@ -10,6 +10,7 @@ namespace TaskKillerLite
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
+    using System.Reflection;
     using System.Windows.Forms;
 
     /// <summary>
@@ -17,6 +18,12 @@ namespace TaskKillerLite
     /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Gets or sets the associated icon.
+        /// </summary>
+        /// <value>The associated icon.</value>
+        private Icon associatedIcon = null;
+
         // The process exclusion list
         List<string> processExclusionList = new List<string>() { "conhost", "dwm", "explorer", "rundll32", "taskhost" };
 
@@ -27,6 +34,12 @@ namespace TaskKillerLite
         {
             // The InitializeComponent() call is required for Windows Forms designer support.
             this.InitializeComponent();
+
+            // Set associated icon from exe file
+            this.associatedIcon = Icon.ExtractAssociatedIcon(typeof(MainForm).GetTypeInfo().Assembly.Location);
+
+            // Set public domain weekly tool strip menu item image
+            this.weeklyReleasesPublicDomainWeeklycomToolStripMenuItem.Image = this.associatedIcon.ToBitmap();
 
             // Set initial proces list
             this.SetProcessList();
@@ -39,7 +52,8 @@ namespace TaskKillerLite
         /// <param name="e">E.</param>
         private void OnNewToolStripMenuItemClick(object sender, EventArgs e)
         {
-            // TODO Add code
+            // Refresh list
+            this.SetProcessList();
         }
 
         /// <summary>
@@ -118,6 +132,9 @@ namespace TaskKillerLite
         /// </summary>
         private void SetProcessList()
         {
+            // Clear the list
+            this.processListView.Items.Clear();
+
             // List processes for current user
             foreach (var process in Process.GetProcesses())
             {
